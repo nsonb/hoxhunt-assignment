@@ -81,9 +81,12 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 
 			{/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
 			<HeroCardContainer>
-				{data.heroes.map((hero) => (
-					<HeroCard key={hero.name} {...hero} />
-				))}
+				{data.heroes.map((hero) => {
+					console.log(hero)
+					return (
+						<HeroCard key={hero.name} {...hero} />
+					)
+				})}
 			</HeroCardContainer>
 
 			<Footer />
