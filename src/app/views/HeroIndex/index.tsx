@@ -73,12 +73,10 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 				paragraph={`
           Professor Hoax gave us this Hunter Index -tool 
           so we can see how our heroes manage against evildoers. 
-          Unfortunately he forgot to implement their HeroCards. 
-          It's your job to finish his work before we can continue
-          on our journey together!
+          These are the brave and powerful heroes who have come
+		  to our aid.
         `}
 			/>
-
 			{/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
 			<HeroCardContainer>
 				{data.heroes.map((hero) => {

@@ -1,11 +1,12 @@
 // It is your job to implement this. More info in README
 import * as React from 'react'
+// interface for skill for hero
 interface skill {
   name: string
   damage: number
   element: string
 }
-
+// interface for hero
 interface IHeroCardProps {
   name: string
 	imgUrl: string
@@ -23,11 +24,12 @@ interface IHeroCardProps {
     weakness: string
   }
   skills: skill[]
-  // extend this
 }
 
-export const HeroCard: React.FC<IHeroCardProps> = ({ name }) => {
+export const HeroCard: React.FC<IHeroCardProps> = (hero: IHeroCardProps) => {
   return (
-    <div>{name}</div>
+    <div>
+      {hero.name}
+    </div>
   )
 }
