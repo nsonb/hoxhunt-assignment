@@ -42,10 +42,13 @@ const HeroCardContainer = styled.div`
 	display: flex;
 	padding: 50px;
 	align-self: center;
+	
 	max-width: 1150px;
 	@media (min-width: 1400px) {
 		margin-left: auto;
 		margin-right: auto;
+		flex-direction: row;
+		justify-content: space-between
 	}
 `;
 
