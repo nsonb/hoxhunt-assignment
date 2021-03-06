@@ -31,7 +31,7 @@ interface IHeroCardProps {
 const Container = styled.div`
   padding: 3rem;
   font-family: 'Montserrat';
-  width: 20%;
+  width: 30%;
   height: 40rem;
   border-radius: 8px;
   box-sizing: border-box;
@@ -46,9 +46,9 @@ const Container = styled.div`
     width: 80%;
   }
 
-  &:hover & > * {
+  &:hover &>* {
     width: 5% !important;
-    filter: sepia(0.8);
+    transform: translateY(-5rem);
   }
 
   & .face {
@@ -77,7 +77,6 @@ const Container = styled.div`
         top: .8rem;
         transform: translateX( -50%);
         width: 80%;
-        
         z-index: 5;
         border-radius: 3px
       }
@@ -104,7 +103,6 @@ const Container = styled.div`
         
         & img {
           height: 100%;
-          transform: translateX(-3rem);
           filter: sepia(0.4);
           transition: all 0.5s;
 
