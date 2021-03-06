@@ -66,23 +66,23 @@ const Container = styled.div`
         left: 50%;
         top: .8rem;
         transform: translateX( -50%);
-        width: 80%;
+        width: 85%;
         z-index: 5;
         border-radius: 3px
       }
 
       &--desc {
         position: absolute;
-        bottom: 1rem;
+        bottom: .9rem;
         left: 50%;
-        transform: translateX(-50%);
-        width: 80%;
+        width: 40rem;
         font-size: 1rem;
         z-index: 5;
-        padding: .5rem;
+        padding: .8rem;
         border-radius: 5px;
-        opacity: 0;
-        visibility: 0;
+        text-align: justify;
+        text-justify: inter-word;
+        transition: all 0.4s ease-in;
       }
 
       &--img {
@@ -93,12 +93,8 @@ const Container = styled.div`
         
         & img {
           height: 100%;
-          filter: sepia(0.4);
+          filter: saturate(0.6);
           transition: all 0.5s;
-
-          &:hover {
-            filter: none;
-          }
         }
       }
 
@@ -120,40 +116,45 @@ const Container = styled.div`
 
 const getWidth = (dsplay: string) => {
   switch (dsplay) {
-    case 'main': return '70%' ; break;
-    case 'equal': return '30%'; break;
-    case 'sub' : return '10%'; break;
-    default: return '30%'; break;
-  }
+    case 'main': return '70%' ;    case 'equal': return '30%';    case 'sub' : return '10%';    default: return '30%';  }
+}
+
+const getFilter = (dsplay: string) => {
+  switch (dsplay) {
+    case 'main': return 1 ;    case 'equal': return .6;    case 'sub' : return .1;    default: return .6;  }
 }
 
 export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: string, setCurrentHover: React.Dispatch<React.SetStateAction<number | null>>}) => {
-  const [flipped, setFlipped] = React.useState(false)
+  const [ flipped, setFlipped ] = React.useState(false)
+  const [ transitionDelay, settransitionDelay ] = React.useState('.8s')
   const { hero, index, dsplay, setCurrentHover } = props
   const { data, loading, error } = usePalette(hero.imgUrl)
 
-  const width = getWidth(dsplay)
-  
   return (
-    <Container onClick={() => {setFlipped(!flipped);setCurrentHover(null)}} style={{width: width}}>
+    <Container onClick={() => {setFlipped(!flipped);setCurrentHover(null)}} style={{width: getWidth(dsplay)}}>
       <div 
         className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}
-        onMouseEnter = {() => {setCurrentHover(index)}}
-        onMouseLeave = {() => {setCurrentHover(null)}}
+        onMouseEnter = {() => {setCurrentHover(index), settransitionDelay('0.8s')}}
+        onMouseLeave = {() => {setCurrentHover(null), settransitionDelay('0')}}
       >
         <h1 className="face__front--name" style={{ backgroundColor: data.darkMuted+'A6', color: data.vibrant }}>
           {hero.name}
         </h1>
         <div className='face__front--img'>
-          <img src={hero.imgUrl} alt="avatar of hero"/>
+          <img src={hero.imgUrl} alt="avatar of hero" style = {{filter: `saturate(${getFilter(dsplay)})`}}/>
         </div>
-        <div className="face__front--desc" style={{ backgroundColor: data.darkVibrant+'F2',color: 'white'}}>
-          <p>{hero.backStory}</p>
+        <div 
+          className="face__front--desc" 
+          style={{ 
+            backgroundColor: data.darkVibrant+'F2', 
+            color: 'white',
+            opacity: dsplay === 'main' ? 1 : 0,
+            visibility: dsplay === 'main' ? 'visible' : 'hidden',
+            transform: dsplay === 'main' ? 'translate(-50%, 0)' : 'translate(-50%, 5rem)',
+          }}
+        >
+          {hero.backStory}
         </div>
-        <div style={{position: 'absolute', width: '100%', bottom: 0, padding: '1rem'}}>
-          <button onClick = {() => {}}></button>
-        </div>
-        
       </div>
       <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`}>
 
