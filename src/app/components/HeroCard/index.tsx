@@ -71,7 +71,7 @@ const Container = styled.div`
         border-radius: 3px
       }
 
-      &--desc {
+      &--backstory {
         position: absolute;
         bottom: .9rem;
         left: 50%;
@@ -86,13 +86,13 @@ const Container = styled.div`
       }
 
       &--img {
-        object-fit: cover;
         overflow: hidden;
         height: 100%;
         z-index: -5;
         
         & img {
           height: 100%;
+          object-fit: cover;
           filter: saturate(0.6);
           transition: all 0.5s;
         }
@@ -105,8 +105,28 @@ const Container = styled.div`
 
     &__back {
       transform: rotateY(180deg);
-      background-color: blue;
-      transition: all 0.5s;
+      text-align: center;
+
+      &--desc {
+        display: inline-block;
+        width: 82%;
+        font-size: 1rem;
+        z-index: 5;
+        margin: .8rem;
+        padding: .8rem;
+        border-radius: 5px;
+        text-align: justify;
+        text-justify: inter-word;
+        background-color: white;
+      }
+
+      &--attributes {
+        & ul {
+          list-style: none
+        }
+          
+      }
+
       &-flipped {
         transform: rotateY(0);
       }
@@ -116,7 +136,7 @@ const Container = styled.div`
 
 const getWidth = (dsplay: string) => {
   switch (dsplay) {
-    case 'main': return '70%' ;    case 'equal': return '30%';    case 'sub' : return '10%';    default: return '30%';  }
+    case 'main': return '68%' ;    case 'equal': return '30%';    case 'sub' : return '10%';    default: return '30%';  }
 }
 
 const getFilter = (dsplay: string) => {
@@ -126,7 +146,6 @@ const getFilter = (dsplay: string) => {
 
 export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: string, setCurrentHover: React.Dispatch<React.SetStateAction<number | null>>}) => {
   const [ flipped, setFlipped ] = React.useState(false)
-  const [ transitionDelay, settransitionDelay ] = React.useState('.8s')
   const { hero, index, dsplay, setCurrentHover } = props
   const { data, loading, error } = usePalette(hero.imgUrl)
 
@@ -134,8 +153,8 @@ export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: st
     <Container onClick={() => {setFlipped(!flipped);setCurrentHover(null)}} style={{width: getWidth(dsplay)}}>
       <div 
         className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}
-        onMouseEnter = {() => {setCurrentHover(index), settransitionDelay('0.8s')}}
-        onMouseLeave = {() => {setCurrentHover(null), settransitionDelay('0')}}
+        onMouseEnter = {() => {setCurrentHover(index)}}
+        onMouseLeave = {() => {setCurrentHover(null)}}
       >
         <h1 className="face__front--name" style={{ backgroundColor: data.darkMuted+'A6', color: data.vibrant }}>
           {hero.name}
@@ -144,7 +163,7 @@ export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: st
           <img src={hero.imgUrl} alt="avatar of hero" style = {{filter: `saturate(${getFilter(dsplay)})`}}/>
         </div>
         <div 
-          className="face__front--desc" 
+          className="face__front--backstory" 
           style={{ 
             backgroundColor: data.darkVibrant+'F2', 
             color: 'white',
@@ -153,11 +172,27 @@ export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: st
             transform: dsplay === 'main' ? 'translate(-50%, 0)' : 'translate(-50%, 5rem)',
           }}
         >
-          {hero.backStory}
+          {hero.description}
         </div>
       </div>
-      <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`}>
-
+      <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`} style={{backgroundColor: data.lightVibrant+'A6'}}>
+        <div className='face__back--desc'>
+          {hero.description}
+        </div>
+        <div className="face__back--attributes">
+          <h3>Attributes</h3>
+          <ul>
+            <li>Strength</li>
+            <li>Agility</li>
+            <li>Intelligence</li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
       </div>
       
     </Container>
