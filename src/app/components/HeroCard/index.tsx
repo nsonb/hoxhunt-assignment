@@ -1,6 +1,7 @@
 // It is your job to implement this. More info in README
 import * as React from 'react'
 import styled from 'styled-components';
+import { usePalette } from 'react-palette'
 // interface for skill for hero
 interface skill {
   name: string
@@ -8,7 +9,7 @@ interface skill {
   element: string
 }
 // interface for hero
-interface IHeroCardProps {
+export interface IHeroCardProps {
   name: string
 	imgUrl: string
   description: string
@@ -31,7 +32,6 @@ const Container = styled.div`
   padding: 3rem;
   font-family: 'Montserrat';
   height: 40rem;
-  width: 30%;
   border-radius: 8px;
   box-sizing: border-box;
   perspective: 100rem;
@@ -39,11 +39,7 @@ const Container = styled.div`
     -moz-perspective: 100rem;
   position: relative;
   cursor: pointer;
-  transition: all 0.4s;
-
-  &:hover {
-    transform: translateY(-.5rem);
-  }
+  transition: all 0.8s;
 
   & .face {
     height: 40rem;
@@ -70,11 +66,23 @@ const Container = styled.div`
         left: 50%;
         top: .8rem;
         transform: translateX( -50%);
-        width: 80%;
-        
+        width: 85%;
         z-index: 5;
-        background-color: rgba(255, 255, 255, 0.8);
         border-radius: 3px
+      }
+
+      &--desc {
+        position: absolute;
+        bottom: .9rem;
+        left: 50%;
+        width: 40rem;
+        font-size: 1rem;
+        z-index: 5;
+        padding: .8rem;
+        border-radius: 5px;
+        text-align: justify;
+        text-justify: inter-word;
+        transition: all 0.4s ease-in;
       }
 
       &--img {
@@ -85,13 +93,8 @@ const Container = styled.div`
         
         & img {
           height: 100%;
-          transform: translateX(-3rem);
-          filter: sepia(0.4);
+          filter: saturate(0.6);
           transition: all 0.5s;
-
-          &:hover {
-            filter: none;
-          }
         }
       }
 
@@ -111,18 +114,47 @@ const Container = styled.div`
   } 
 `
 
-export const HeroCard: React.FC<IHeroCardProps> = (hero: IHeroCardProps) => {
-  const [flipped, setFlipped] = React.useState(false)
+const getWidth = (dsplay: string) => {
+  switch (dsplay) {
+    case 'main': return '70%' ;    case 'equal': return '30%';    case 'sub' : return '10%';    default: return '30%';  }
+}
+
+const getFilter = (dsplay: string) => {
+  switch (dsplay) {
+    case 'main': return 1 ;    case 'equal': return .6;    case 'sub' : return .1;    default: return .6;  }
+}
+
+export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: string, setCurrentHover: React.Dispatch<React.SetStateAction<number | null>>}) => {
+  const [ flipped, setFlipped ] = React.useState(false)
+  const [ transitionDelay, settransitionDelay ] = React.useState('.8s')
+  const { hero, index, dsplay, setCurrentHover } = props
+  const { data, loading, error } = usePalette(hero.imgUrl)
+
   return (
-    <Container onClick={() => {setFlipped(!flipped)}}>
-      <div className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}>
-        <h1 className="face__front--name">
+    <Container onClick={() => {setFlipped(!flipped);setCurrentHover(null)}} style={{width: getWidth(dsplay)}}>
+      <div 
+        className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}
+        onMouseEnter = {() => {setCurrentHover(index), settransitionDelay('0.8s')}}
+        onMouseLeave = {() => {setCurrentHover(null), settransitionDelay('0')}}
+      >
+        <h1 className="face__front--name" style={{ backgroundColor: data.darkMuted+'A6', color: data.vibrant }}>
           {hero.name}
         </h1>
         <div className='face__front--img'>
-          <img src={hero.imgUrl} alt="avatar of hero"/>
+          <img src={hero.imgUrl} alt="avatar of hero" style = {{filter: `saturate(${getFilter(dsplay)})`}}/>
         </div>
-        
+        <div 
+          className="face__front--desc" 
+          style={{ 
+            backgroundColor: data.darkVibrant+'F2', 
+            color: 'white',
+            opacity: dsplay === 'main' ? 1 : 0,
+            visibility: dsplay === 'main' ? 'visible' : 'hidden',
+            transform: dsplay === 'main' ? 'translate(-50%, 0)' : 'translate(-50%, 5rem)',
+          }}
+        >
+          {hero.backStory}
+        </div>
       </div>
       <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`}>
 
