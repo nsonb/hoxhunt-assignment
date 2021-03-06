@@ -9,7 +9,7 @@ interface skill {
   element: string
 }
 // interface for hero
-interface IHeroCardProps {
+export interface IHeroCardProps {
   name: string
 	imgUrl: string
   description: string
@@ -31,7 +31,6 @@ interface IHeroCardProps {
 const Container = styled.div`
   padding: 3rem;
   font-family: 'Montserrat';
-  width: 30%;
   height: 40rem;
   border-radius: 8px;
   box-sizing: border-box;
@@ -41,15 +40,6 @@ const Container = styled.div`
   position: relative;
   cursor: pointer;
   transition: all 0.8s;
-
-  &:hover {
-    width: 80%;
-  }
-
-  &:hover &>* {
-    width: 5% !important;
-    transform: translateY(-5rem);
-  }
 
   & .face {
     height: 40rem;
@@ -128,12 +118,29 @@ const Container = styled.div`
   } 
 `
 
-export const HeroCard: React.FC<IHeroCardProps> = (hero: IHeroCardProps) => {
+const getWidth = (dsplay: string) => {
+  switch (dsplay) {
+    case 'main': return '70%' ; break;
+    case 'equal': return '30%'; break;
+    case 'sub' : return '10%'; break;
+    default: return '30%'; break;
+  }
+}
+
+export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: string, setCurrentHover: React.Dispatch<React.SetStateAction<number | null>>}) => {
   const [flipped, setFlipped] = React.useState(false)
+  const { hero, index, dsplay, setCurrentHover } = props
   const { data, loading, error } = usePalette(hero.imgUrl)
+
+  const width = getWidth(dsplay)
+  
   return (
-    <Container onClick={() => {setFlipped(!flipped)}}>
-      <div className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}>
+    <Container onClick={() => {setFlipped(!flipped)}} style={{width: width}}>
+      <div 
+        className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}
+        onMouseEnter = {() => {setCurrentHover(index)}}
+        onMouseLeave = {() => {setCurrentHover(null)}}
+      >
         <h1 className="face__front--name" style={{ backgroundColor: data.darkMuted+'A6', color: data.vibrant }}>
           {hero.name}
         </h1>

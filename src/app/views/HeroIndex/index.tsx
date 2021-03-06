@@ -7,7 +7,7 @@ import { TopBar } from '../../components/TopBar';
 import { Hero } from '../../components/Hero';
 import { Section } from '../../components/Section';
 import { Footer } from '../../components/Footer';
-import { HeroCard } from '../../components/HeroCard';
+import { HeroCard, IHeroCardProps } from '../../components/HeroCard';
 
 const HEROES_QUERY = gql`
 	query {
@@ -35,9 +35,7 @@ const HEROES_QUERY = gql`
 		}
 	}
 `;
-
 interface IHeroIndexProps {}
-
 const HeroCardContainer = styled.div`
 	display: flex;
 	padding: 50px;
@@ -65,7 +63,7 @@ const handleError = (message: string) => <div>Error! {message}</div>;
 
 export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 	const { data, error, loading } = useQuery(HEROES_QUERY);
-
+	const [ currentHover, setCurrentHover ] = React.useState<number | null >(null)
 	if (error) {
 		return handleError(error.message);
 	}
@@ -89,10 +87,17 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 			/>
 			{/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
 			<HeroCardContainer>
-				{data.heroes.map((hero) => {
+				<p>{currentHover}</p>
+				{data.heroes.map((hero: IHeroCardProps, index: number) => {
 					console.log(hero)
 					return (
-						<HeroCard key={hero.name} {...hero} />
+						<HeroCard 
+							key={hero.name} 
+							hero = {hero} 
+							index = {index} 
+							setCurrentHover={setCurrentHover}
+							dsplay = {currentHover === null? 'equal' : (index === currentHover? 'main' : 'sub')}
+						/>
 					)
 				})}
 			</HeroCardContainer>
