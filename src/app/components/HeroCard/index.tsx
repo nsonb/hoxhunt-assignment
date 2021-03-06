@@ -1,6 +1,7 @@
 // It is your job to implement this. More info in README
 import * as React from 'react'
 import styled from 'styled-components';
+import { usePalette } from 'react-palette'
 // interface for skill for hero
 interface skill {
   name: string
@@ -30,8 +31,8 @@ interface IHeroCardProps {
 const Container = styled.div`
   padding: 3rem;
   font-family: 'Montserrat';
+  width: 20%;
   height: 40rem;
-  width: 30%;
   border-radius: 8px;
   box-sizing: border-box;
   perspective: 100rem;
@@ -39,10 +40,15 @@ const Container = styled.div`
     -moz-perspective: 100rem;
   position: relative;
   cursor: pointer;
-  transition: all 0.4s;
+  transition: all 0.8s;
 
   &:hover {
-    transform: translateY(-.5rem);
+    width: 80%;
+  }
+
+  &:hover & > * {
+    width: 5% !important;
+    filter: sepia(0.8);
   }
 
   & .face {
@@ -73,8 +79,21 @@ const Container = styled.div`
         width: 80%;
         
         z-index: 5;
-        background-color: rgba(255, 255, 255, 0.8);
         border-radius: 3px
+      }
+
+      &--desc {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        font-size: 1rem;
+        z-index: 5;
+        padding: .5rem;
+        border-radius: 5px;
+        opacity: 0;
+        visibility: 0;
       }
 
       &--img {
@@ -113,14 +132,21 @@ const Container = styled.div`
 
 export const HeroCard: React.FC<IHeroCardProps> = (hero: IHeroCardProps) => {
   const [flipped, setFlipped] = React.useState(false)
+  const { data, loading, error } = usePalette(hero.imgUrl)
   return (
     <Container onClick={() => {setFlipped(!flipped)}}>
       <div className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}>
-        <h1 className="face__front--name">
+        <h1 className="face__front--name" style={{ backgroundColor: data.darkMuted+'A6', color: data.vibrant }}>
           {hero.name}
         </h1>
         <div className='face__front--img'>
           <img src={hero.imgUrl} alt="avatar of hero"/>
+        </div>
+        <div className="face__front--desc" style={{ backgroundColor: data.darkVibrant+'F2',color: 'white'}}>
+          <p>{hero.backStory}</p>
+        </div>
+        <div style={{position: 'absolute', width: '100%', bottom: 0, padding: '1rem'}}>
+          <button onClick = {() => {}}></button>
         </div>
         
       </div>

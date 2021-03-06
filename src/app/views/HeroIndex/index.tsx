@@ -50,6 +50,13 @@ const HeroCardContainer = styled.div`
 		flex-direction: row;
 		justify-content: space-between
 	}
+
+	@media (max-width: 800px) {
+		margin-left: auto;
+		margin-right: auto;
+		flex-direction: column;
+		justify-content: space-between
+	}
 `;
 
 const handleLoading = () => <div>Loading...</div>;
