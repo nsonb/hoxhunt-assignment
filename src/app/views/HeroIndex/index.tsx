@@ -87,7 +87,6 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 			/>
 			{/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
 			<HeroCardContainer>
-				<p>{currentHover}</p>
 				{data.heroes.map((hero: IHeroCardProps, index: number) => {
 					console.log(hero)
 					return (

@@ -135,7 +135,7 @@ export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: st
   const width = getWidth(dsplay)
   
   return (
-    <Container onClick={() => {setFlipped(!flipped)}} style={{width: width}}>
+    <Container onClick={() => {setFlipped(!flipped);setCurrentHover(null)}} style={{width: width}}>
       <div 
         className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}
         onMouseEnter = {() => {setCurrentHover(index)}}
