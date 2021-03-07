@@ -68,7 +68,7 @@ const Container = styled.div`
         position: absolute;
         left: 50%;
         top: .8rem;
-        transform: translateX( -50%);
+        transform: translateX(-50%);
         width: 85%;
         z-index: 5;
         border-radius: 3px
@@ -134,7 +134,7 @@ const Container = styled.div`
 const AttributeBox = styled.div`
   width: 50%;
   position: relative;
-  margin-top: 3rem;
+  margin-top: 2rem;
   padding: 1.3rem .2rem;
   background-color: #1E145D;
   border-radius: 3px;
