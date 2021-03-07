@@ -109,6 +109,7 @@ const Container = styled.div`
     &__back {
       transform: rotateY(180deg);
       text-align: center;
+      transition: all .8s;
 
       &--desc {
         display: inline-block;
