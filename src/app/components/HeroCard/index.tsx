@@ -3,6 +3,7 @@ import * as React from 'react'
 import styled from 'styled-components';
 import { usePalette } from 'react-palette';
 import AttributeDsplay from './AttributeDsplay';
+import HeroProfile from './HeroProfile';
 
 // interface for skill for hero
 interface skill {
@@ -52,11 +53,11 @@ const Container = styled.div`
     top: 0;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0 , .4);
     backface-visibility: hidden;
-    overflow: hidden;
 
     &__front {
       background-color: #1E145D;
       transition: all 0.5s;
+      overflow: hidden;
 
       &--name {
         text-align: left;
@@ -153,15 +154,20 @@ const AttributeBox = styled.div`
   }
 `
 
-
 const getWidth = (dsplay: string) => {
   switch (dsplay) {
-    case 'main': return '68%' ;    case 'equal': return '30%';    case 'sub' : return '10%';    default: return '30%';  }
+    case 'main': return '50%' ;    
+    case 'equal': return '30%';    
+    case 'sub' : return '20%';    
+    default: return '30%';  }
 }
 
 const getFilter = (dsplay: string) => {
   switch (dsplay) {
-    case 'main': return 1 ;    case 'equal': return .6;    case 'sub' : return .1;    default: return .6;  }
+    case 'main': return 1 ;    
+    case 'equal': return .6;    
+    case 'sub' : return .1;    
+    default: return .6;  }
 }
 
 export const HeroCard = (props: {
@@ -203,7 +209,16 @@ export const HeroCard = (props: {
         </div>
       </div>
       {/* back face of the component */}
-      <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`} style={{backgroundColor: data.lightVibrant+'A6'}}>
+      <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`} style={{backgroundColor: data.darkMuted+'A6'}}>
+        <HeroProfile 
+          name = {hero.name}
+          avatar = {hero.imgUrl}
+          hp = {hero.attributes.healthpoints}
+          mp = {hero.attributes.mana}
+          resist = {hero.attributes.resistance}
+          weakness = {hero.attributes.weakness}
+        />
+          
         <AttributeBox>
           <h3 className='attr__title'>Attributes</h3>
           <AttributeDsplay name = 'Strength' value =  {hero.attributes.strength}/>
