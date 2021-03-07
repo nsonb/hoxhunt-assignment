@@ -1,7 +1,9 @@
 // It is your job to implement this. More info in README
 import * as React from 'react'
 import styled from 'styled-components';
-import { usePalette } from 'react-palette'
+import { usePalette } from 'react-palette';
+import AttributeDsplay from './AttributeDsplay';
+
 // interface for skill for hero
 interface skill {
   name: string
@@ -120,12 +122,6 @@ const Container = styled.div`
         background-color: white;
       }
 
-      &--attributes {
-        & ul {
-          list-style: none
-        }
-          
-      }
 
       &-flipped {
         transform: rotateY(0);
@@ -133,6 +129,30 @@ const Container = styled.div`
     }
   } 
 `
+const AttributeBox = styled.div`
+  width: 50%;
+  position: relative;
+  margin-top: 3rem;
+  padding: 1.3rem .2rem;
+  background-color: #1E145D;
+  border-radius: 3px;
+
+  & .attr__title {
+    position: absolute;
+    top: -.8rem;
+    left: .2rem;
+    margin: 0;
+    width: fit-content;
+    text-align: left;
+    padding: .3rem;
+    background-color: #001147;
+    color: #FC427B;
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 1px white solid;
+  }
+`
+
 
 const getWidth = (dsplay: string) => {
   switch (dsplay) {
@@ -144,13 +164,20 @@ const getFilter = (dsplay: string) => {
     case 'main': return 1 ;    case 'equal': return .6;    case 'sub' : return .1;    default: return .6;  }
 }
 
-export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: string, setCurrentHover: React.Dispatch<React.SetStateAction<number | null>>}) => {
+export const HeroCard = (props: {
+  hero: IHeroCardProps, 
+  index: number, 
+  dsplay: string, 
+  setCurrentHover: React.Dispatch<React.SetStateAction<number | null>>
+}) => {
+
   const [ flipped, setFlipped ] = React.useState(false)
   const { hero, index, dsplay, setCurrentHover } = props
   const { data, loading, error } = usePalette(hero.imgUrl)
 
   return (
     <Container onClick={() => {setFlipped(!flipped);setCurrentHover(null)}} style={{width: getWidth(dsplay)}}>
+      {/* front face of the component */}
       <div 
         className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}
         onMouseEnter = {() => {setCurrentHover(index)}}
@@ -172,27 +199,19 @@ export const HeroCard = (props: {hero: IHeroCardProps, index: number, dsplay: st
             transform: dsplay === 'main' ? 'translate(-50%, 0)' : 'translate(-50%, 5rem)',
           }}
         >
-          {hero.description}
+          {hero.backStory}
         </div>
       </div>
+      {/* back face of the component */}
       <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`} style={{backgroundColor: data.lightVibrant+'A6'}}>
-        <div className='face__back--desc'>
-          {hero.description}
-        </div>
-        <div className="face__back--attributes">
-          <h3>Attributes</h3>
-          <ul>
-            <li>Strength</li>
-            <li>Agility</li>
-            <li>Intelligence</li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
+        <AttributeBox>
+          <h3 className='attr__title'>Attributes</h3>
+          <AttributeDsplay name = 'Strength' value =  {hero.attributes.strength}/>
+          <AttributeDsplay name = 'Agility' value =  {hero.attributes.agility}/>
+          <AttributeDsplay name = 'Intelligence' value =  {hero.attributes.intelligence}/>
+          <AttributeDsplay name = 'Speed' value =  {hero.attributes.speed}/>
+          <AttributeDsplay name = 'Stamina' value =  {hero.attributes.stamina}/>
+        </AttributeBox>
       </div>
       
     </Container>
