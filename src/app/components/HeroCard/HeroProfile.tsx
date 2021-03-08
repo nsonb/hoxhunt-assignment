@@ -4,11 +4,10 @@ import { usePalette } from 'react-palette';
 
 const Box = styled.div`
     width: 100%;
-    height: 7.2rem;
+    height: 6rem;
     position: relative;
     border-radius: 8px;
     padding: .8rem .4rem;
-    background-color: #000;
 
     & .avatar {
         position: absolute;
@@ -88,7 +87,7 @@ const HeroProfile = (props: {name: string, hp: number, mp: number, weakness: str
                 <img src={avatar} alt="hero avatar"/>
             </div>
             <div className="profile">
-                <div className="profile__name" style={{ backgroundColor: data.darkVibrant+'A6', color: data.vibrant }}>{name}</div>
+                <div className="profile__name" style={{ backgroundColor: data.darkVibrant, color: data.vibrant }}>{name}</div>
                 <div className="profile__points">
                     <div className="profile__points--slider">
                         <div className="profile__points--value" style={{width: `${hp/1000 * 100}%` , backgroundColor: '#FC427B'}}/>
@@ -97,7 +96,7 @@ const HeroProfile = (props: {name: string, hp: number, mp: number, weakness: str
                 </div>
                 <div className="profile__points">
                     <div className="profile__points--slider">
-                        <div className="profile__points--value" style={{width: `${mp/20000 * 100}%` , backgroundColor: '#1E145D'}}/>
+                        <div className="profile__points--value" style={{width: `${mp/20000 * 100}%` , backgroundColor: '#E32FFF'}}/>
                         <div className="profile__points--dsplay">{mp} mp</div>
                     </div>
                 </div>
