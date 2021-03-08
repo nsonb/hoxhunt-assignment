@@ -210,7 +210,7 @@ export const HeroCard = (props: {
         </div>
       </div>
       {/* back face of the component */}
-      <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`} style={{backgroundColor: data.darkMuted+'A6'}}>
+      <div className={`face face__back ${flipped? 'face__back-flipped' : ''}`} style={{backgroundColor: '#001147'}}>
         <HeroProfile 
           name = {hero.name}
           avatar = {hero.imgUrl}

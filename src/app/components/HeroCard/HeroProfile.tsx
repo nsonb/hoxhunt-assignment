@@ -4,10 +4,11 @@ import { usePalette } from 'react-palette';
 
 const Box = styled.div`
     width: 100%;
-    height: 8rem;
+    height: 7.2rem;
     position: relative;
     border-radius: 8px;
-    padding: .8rem;
+    padding: .8rem .4rem;
+    background-color: #000;
 
     & .avatar {
         position: absolute;
@@ -23,34 +24,33 @@ const Box = styled.div`
     & .profile {
         height: 100%;
         width: 100%;
-        padding: 0.2rem .5rem;
         box-sizing: border-box;
         border-radius: 8px;
 
         &__name {
             text-align: right;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             padding: .8rem;
             border-radius: 8px;
+            margin-bottom: .2rem;
         }
 
         &__points {
             margin-left: auto;
-            margin-right: 1rem;
+            margin-right: 0;
+            margin-bottom: .2rem;
             width: 60%;
-            height: 1.6rem;
-            
+            height: 1.2rem;
+
             &--slider {
-                border-sizing: border-box;
+                box-sizing: border-box;
                 position: relative;
                 width: 100%;
-                margin-top: 4px;
                 height: 100%;
-                border-radius: 3px;
+                border-radius: 8px;
                 display: block;
                 text-align: right;
-                padding: .2rem;
             }
 
             &--value {
@@ -63,15 +63,15 @@ const Box = styled.div`
 
             &--dsplay {
                 box-sizing: border-box;
-                padding: 0.4rem;
                 display: block;
-                height: 100%;
                 text-align: justify;
                 color: white;
                 position: absolute;
                 top: 50%;
                 right: .2rem;
                 transform: translateY(-50%);
+                font-size: .6rem;
+                text-transform: uppercase;
             }
         }
     }
