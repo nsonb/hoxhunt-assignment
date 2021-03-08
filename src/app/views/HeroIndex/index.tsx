@@ -75,8 +75,7 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 
 	return (
 		<main>
-			<TopBar />
-			<Hero />
+			
 			<Section
 				heading={'Hunter Index'}
 				paragraph={`
@@ -101,7 +100,8 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 					)
 				})}
 			</HeroCardContainer>
-
+			<TopBar />
+			<Hero />
 			<Footer />
 		</main>
 	);

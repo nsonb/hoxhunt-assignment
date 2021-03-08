@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { usePalette } from 'react-palette';
 
 const Box = styled.div`
-    width: 100%;
+    width: 95%;
     height: 6rem;
     position: relative;
     border-radius: 8px;
     padding: .8rem .4rem;
-
+    
     & .avatar {
         position: absolute;
-        top: -4rem;
+        top: -5rem;
         left: -1rem;
         & img {
-            width: 20rem;
+            width: 18rem;
             clip-path: circle(32.2% at 32% 50%);
             transform: translateX(-1rem);
         }
@@ -33,6 +33,7 @@ const Box = styled.div`
             padding: .8rem;
             border-radius: 8px;
             margin-bottom: .2rem;
+            
         }
 
         &__points {
@@ -87,7 +88,7 @@ const HeroProfile = (props: {name: string, hp: number, mp: number, weakness: str
                 <img src={avatar} alt="hero avatar"/>
             </div>
             <div className="profile">
-                <div className="profile__name" style={{ backgroundColor: data.darkVibrant, color: data.vibrant }}>{name}</div>
+                <div className="profile__name" style={{ backgroundColor: data.lightVibrant, color: 'white' }}>{name}</div>
                 <div className="profile__points">
                     <div className="profile__points--slider">
                         <div className="profile__points--value" style={{width: `${hp/1000 * 100}%` , backgroundColor: '#FC427B'}}/>

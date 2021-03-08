@@ -2,34 +2,12 @@
 import * as React from 'react'
 import styled from 'styled-components';
 import { usePalette } from 'react-palette';
+// import component
 import AttributeDsplay from './AttributeDsplay';
 import HeroProfile from './HeroProfile';
+import SkillDsplay from './SkillDsplay';
 
-// interface for skill for hero
-interface skill {
-  name: string
-  damage: number
-  element: string
-}
-// interface for hero
-export interface IHeroCardProps {
-  name: string
-	imgUrl: string
-  description: string
-  backStory: string
-  attributes: {
-    strength: number
-    intelligence: number
-    stamina: number
-    healthpoints: number
-    mana: number
-    agility: number
-    speed: number
-    resistance: string
-    weakness: string
-  }
-  skills: skill[]
-}
+import { skill, IHeroCardProps} from '../../type'
 
 const Container = styled.div`
   padding: 3rem;
@@ -43,6 +21,7 @@ const Container = styled.div`
   position: relative;
   cursor: pointer;
   transition: all 0.8s;
+  min-width: 20rem;
 
   & .face {
     height: 40rem;
@@ -132,27 +111,42 @@ const Container = styled.div`
   } 
 `
 const AttributeBox = styled.div`
-  width: 50%;
+  width: 100%;
   position: relative;
-  margin-top: 2rem;
-  padding: 1.3rem .2rem;
+  margin-top: 1rem;
+  padding: 1.3rem 2rem;
   background-color: #1E145D;
   border-radius: 3px;
+  box-sizing: border-box;
+  font-size: .8rem;
+`
+const HeroDescription = styled.div`
+  color: white;
+  text-align: justify; 
+  padding: 1.3rem 2rem; 
+  background-color: #1E145D;
+  height: fit-content;
+  min-height: 4rem;
+  font-size: .8rem;
+  position: relative;
+  margin-top: .2rem;
+`
 
-  & .attr__title {
-    position: absolute;
-    top: -.8rem;
-    left: .2rem;
-    margin: 0;
-    width: fit-content;
-    text-align: left;
-    padding: .3rem;
-    background-color: #001147;
-    color: #FC427B;
-    border-radius: 3px;
-    box-sizing: border-box;
-    border: 1px white solid;
-  }
+const Title = styled.div`
+  position: absolute;
+  top: -.8rem;
+  left: 1rem;
+  margin: 0;
+  width: fit-content;
+  text-align: left;
+  padding: .3rem;
+  background-color: #001147;
+  color: #FC427B;
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 1px white solid;
+  font-size: 1rem;
+  font-weight: bold;
 `
 
 const getWidth = (dsplay: string) => {
@@ -218,15 +212,30 @@ export const HeroCard = (props: {
           mp = {hero.attributes.mana}
           resist = {hero.attributes.resistance}
           weakness = {hero.attributes.weakness}
-        />
+        ></HeroProfile>
+
+        <HeroDescription>
+          <Title>Description</Title>
+          {hero.description}
+        </HeroDescription>
           
         <AttributeBox>
-          <h3 className='attr__title'>Attributes</h3>
+          <Title>Attributes</Title>
           <AttributeDsplay name = 'Strength' value =  {hero.attributes.strength}/>
           <AttributeDsplay name = 'Agility' value =  {hero.attributes.agility}/>
           <AttributeDsplay name = 'Intelligence' value =  {hero.attributes.intelligence}/>
           <AttributeDsplay name = 'Speed' value =  {hero.attributes.speed}/>
           <AttributeDsplay name = 'Stamina' value =  {hero.attributes.stamina}/>
+        </AttributeBox>
+
+        <AttributeBox>
+          <Title>Skills</Title>
+          <div style={{display: 'flex', flexDirection: 'row'}}>
+            {hero.skills.map((s: skill) => {
+              return <SkillDsplay skill = {s} key={s.name+s.element}/>
+            })}
+          </div>
+          
         </AttributeBox>
       </div>
       

@@ -5,9 +5,8 @@ const Dsplay = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  width: 95%;
+  width: 100%;
   padding: .3rem;
-  box-sizing: border-box;
   
   & .attr {
     width: 80%;
