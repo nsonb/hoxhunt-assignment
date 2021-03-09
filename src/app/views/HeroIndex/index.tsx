@@ -7,7 +7,8 @@ import { TopBar } from '../../components/TopBar';
 import { Hero } from '../../components/Hero';
 import { Section } from '../../components/Section';
 import { Footer } from '../../components/Footer';
-import { HeroCard, IHeroCardProps } from '../../components/HeroCard';
+import { HeroCard } from '../../components/HeroCard';
+import { IHeroCardProps } from '../../type'
 
 const HEROES_QUERY = gql`
 	query {
@@ -75,15 +76,16 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 
 	return (
 		<main>
-			
+			<TopBar />
+			<Hero />
 			<Section
 				heading={'Hunter Index'}
 				paragraph={`
-          Professor Hoax gave us this Hunter Index -tool 
-          so we can see how our heroes manage against evildoers. 
-          These are the brave and powerful heroes who have come
-		  to our aid.
-        `}
+					Professor Hoax gave us this Hunter Index -tool 
+					so we can see how our heroes manage against evildoers. 
+					These are the brave and powerful heroes who have come
+					to our aid.
+				`}
 			/>
 			{/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
 			<HeroCardContainer>
@@ -100,8 +102,7 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 					)
 				})}
 			</HeroCardContainer>
-			<TopBar />
-			<Hero />
+			
 			<Footer />
 		</main>
 	);

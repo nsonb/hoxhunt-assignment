@@ -33,7 +33,7 @@ const Box = styled.div`
             padding: .8rem;
             border-radius: 8px;
             margin-bottom: .2rem;
-            
+            width: 100%;
         }
 
         &__points {
@@ -88,7 +88,7 @@ const HeroProfile = (props: {name: string, hp: number, mp: number, weakness: str
                 <img src={avatar} alt="hero avatar"/>
             </div>
             <div className="profile">
-                <div className="profile__name" style={{ backgroundColor: data.lightVibrant, color: 'white' }}>{name}</div>
+                <div className="profile__name" style={{ backgroundColor: 'black', color: data.vibrant}}>{name}</div>
                 <div className="profile__points">
                     <div className="profile__points--slider">
                         <div className="profile__points--value" style={{width: `${hp/1000 * 100}%` , backgroundColor: '#FC427B'}}/>

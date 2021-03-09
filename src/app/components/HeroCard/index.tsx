@@ -21,7 +21,7 @@ const Container = styled.div`
   position: relative;
   cursor: pointer;
   transition: all 0.8s;
-  min-width: 20rem;
+  min-width: 22rem;
 
   & .face {
     height: 40rem;
@@ -125,8 +125,7 @@ const HeroDescription = styled.div`
   text-align: justify; 
   padding: 1.3rem 2rem; 
   background-color: #1E145D;
-  height: fit-content;
-  min-height: 4rem;
+  height: 5rem;
   font-size: .8rem;
   position: relative;
   margin-top: .2rem;
@@ -228,9 +227,9 @@ export const HeroCard = (props: {
           <AttributeDsplay name = 'Stamina' value =  {hero.attributes.stamina}/>
         </AttributeBox>
 
-        <AttributeBox>
+        <AttributeBox style={{paddingLeft: '.5rem', paddingRight: '.5rem'}}>
           <Title>Skills</Title>
-          <div style={{display: 'flex', flexDirection: 'row'}}>
+          <div style={{}}>
             {hero.skills.map((s: skill) => {
               return <SkillDsplay skill = {s} key={s.name+s.element}/>
             })}
