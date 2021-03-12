@@ -84,7 +84,8 @@ const Box = styled.div`
     }
 `
 
-// display hero avatar, name, hp, mp, weakness and strength 
+// display hero avatar, name, hp, mp and strength; resist is taken but is not used yet.
+// the slider is similar to AttributeDsplay slider.
 const HeroProfile = (props: {name: string, hp: number, mp: number, weakness: string, resist: string, avatar: string}) => {
     const {name, hp, mp, weakness, resist, avatar} = props
     const { data, loading, error } = usePalette(avatar)

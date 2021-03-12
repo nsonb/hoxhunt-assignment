@@ -59,7 +59,7 @@ const ElementDmg = styled.div`
     display: flex;
     justify-content: center;
 `
-
+// decide which image to fetch based on the type of damage of the skill
 const getImg = (element: string) => {
     switch(element) {
         case 'Fire': 
@@ -73,6 +73,7 @@ const getImg = (element: string) => {
     }
 }
 
+// decide which color to use based on the type of damage of the skill
 const getElementColor = (element: string) => {
     switch(element) {
         case 'Fire': 
@@ -86,7 +87,7 @@ const getElementColor = (element: string) => {
     }
 }
 
-
+// display the hero skill
 const SkillDsplay = (props: {skill: skill}) => {
     const {skill} = props
 

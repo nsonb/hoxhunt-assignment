@@ -9,6 +9,8 @@ import SkillDsplay from './SkillDsplay';
 
 import { skill, IHeroCardProps} from '../../type'
 
+// this styled-component is written in sass style
+// some components can be taken out as individual component
 const Container = styled.div`
   padding: 3rem;
   font-family: 'Montserrat';
@@ -132,6 +134,7 @@ const AttributeBox = styled.div`
   box-sizing: border-box;
   font-size: .8rem;
 `
+
 const HeroDescription = styled.div`
   color: white;
   text-align: justify; 
@@ -142,7 +145,7 @@ const HeroDescription = styled.div`
   position: relative;
   margin-top: .2rem;
 `
-
+// styling for title of each section in the card
 const Title = styled.div`
   position: absolute;
   top: -.8rem;
@@ -159,7 +162,8 @@ const Title = styled.div`
   font-size: 1rem;
   font-weight: bold;
 `
-
+// decide the width of the hero card based on whether the card is hovered or
+// another card in the set is hovered
 const getWidth = (dsplay: string) => {
   switch (dsplay) {
     case 'main': return '55%' ;    
@@ -170,6 +174,8 @@ const getWidth = (dsplay: string) => {
   }
 }
 
+// decide the filter of the image in the hero card based on whether the card is hovered or
+// another card in the set is hovered 
 const getFilter = (dsplay: string) => {
   switch (dsplay) {
     case 'main': return 1 ;    

@@ -35,8 +35,10 @@ const HEROES_QUERY = gql`
 			}
 		}
 	}
-`;
+`
+
 interface IHeroIndexProps {}
+// styling for the box that contains the hero card.
 const HeroCardContainer = styled.div`
 	display: flex;
 	padding: 2rem 3rem;
@@ -98,6 +100,7 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 							index = {index} 
 							setCurrentHover={setCurrentHover}
 							dsplay = {
+								/* check for screen width to decide whether the hero card will flip */
 								window.screen.width > 1028 ?
 									(currentHover === null? 'equal' : 
 										(index === currentHover? 'main' : 'sub')) :

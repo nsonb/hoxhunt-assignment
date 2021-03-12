@@ -33,6 +33,9 @@ const Dsplay = styled.div`
     border-radius: 3px;
   }
 `
+// this component takes in the name of the value and the value to display it in a row
+// the value is displayed in a slider that with maximum value being at 100 and minimum at 0
+
 const AttributeDsplay = (props: { name: string, value: number}) => {
     const {name, value} = props
     return (
