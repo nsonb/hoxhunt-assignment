@@ -34,6 +34,13 @@ const Box = styled.div`
             border-radius: 8px;
             margin-bottom: .2rem;
             width: 100%;
+            
+            @media (max-width: 1017px) {
+                font-size: 1.2rem;
+                width: 92%;
+                padding-right: 3rem;
+                border: 1px solid white;
+            }
         }
 
         &__points {

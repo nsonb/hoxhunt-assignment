@@ -12,7 +12,7 @@ import { skill, IHeroCardProps} from '../../type'
 const Container = styled.div`
   padding: 3rem;
   font-family: 'Montserrat';
-  height: 40rem;
+  height: 42rem;
   border-radius: 8px;
   box-sizing: border-box;
   perspective: 100rem;
@@ -21,10 +21,10 @@ const Container = styled.div`
   position: relative;
   cursor: pointer;
   transition: all 0.8s;
-  min-width: 22rem;
+  min-width: 21rem;
 
   & .face {
-    height: 40rem;
+    height: 42rem;
     width: 100%;
     border-radius: 8px;
     position: absolute;
@@ -57,11 +57,12 @@ const Container = styled.div`
         position: absolute;
         bottom: .9rem;
         left: 50%;
-        width: 40rem;
-        font-size: 1rem;
+        width: 20rem;
+        font-size: .8rem;
         z-index: 5;
         padding: .8rem;
         border-radius: 5px;
+        border: 1px solid white;
         text-align: justify;
         text-justify: inter-word;
         transition: all 0.4s ease-in;
@@ -77,6 +78,10 @@ const Container = styled.div`
           object-fit: cover;
           filter: saturate(0.6);
           transition: all 0.5s;
+          @media (max-width: 1028px) {
+            transform: translateX(-10rem);
+            transition: all 0.5s;
+          }
         }
       }
 
@@ -108,13 +113,20 @@ const Container = styled.div`
         transform: rotateY(0);
       }
     }
-  } 
+  }
+
+  @media (max-width: 1028px) {
+    height: 50rem;
+    margin: 1rem auto;
+    min-width: 18rem;
+  }
+
 `
 const AttributeBox = styled.div`
   width: 100%;
   position: relative;
   margin-top: 1rem;
-  padding: 1.3rem 2rem;
+  padding: 2rem 1.5rem;
   background-color: #1E145D;
   border-radius: 3px;
   box-sizing: border-box;
@@ -150,10 +162,12 @@ const Title = styled.div`
 
 const getWidth = (dsplay: string) => {
   switch (dsplay) {
-    case 'main': return '50%' ;    
+    case 'main': return '55%' ;    
     case 'equal': return '30%';    
-    case 'sub' : return '20%';    
-    default: return '30%';  }
+    case 'sub' : return '15%'; 
+    case 'full': return '80%';   
+    default: return '30%';  
+  }
 }
 
 const getFilter = (dsplay: string) => {
@@ -163,6 +177,8 @@ const getFilter = (dsplay: string) => {
     case 'sub' : return .1;    
     default: return .6;  }
 }
+
+const canHover = () => window.screen.width >= 1200? true : false
 
 export const HeroCard = (props: {
   hero: IHeroCardProps, 
@@ -174,14 +190,15 @@ export const HeroCard = (props: {
   const [ flipped, setFlipped ] = React.useState(false)
   const { hero, index, dsplay, setCurrentHover } = props
   const { data, loading, error } = usePalette(hero.imgUrl)
-
+  console.log(window.screen.width)
+  console.log(canHover())
   return (
     <Container onClick={() => {setFlipped(!flipped);setCurrentHover(null)}} style={{width: getWidth(dsplay)}}>
       {/* front face of the component */}
       <div 
         className= {`face face__front ${flipped? 'face__front-flipped' : ''}`}
-        onMouseEnter = {() => {setCurrentHover(index)}}
-        onMouseLeave = {() => {setCurrentHover(null)}}
+        onMouseEnter = {() => {canHover()? setCurrentHover(index): null}}
+        onMouseLeave = {() => {canHover()? setCurrentHover(null) : null}}
       >
         <h1 className="face__front--name" style={{ backgroundColor: data.darkMuted+'A6', color: data.vibrant }}>
           {hero.name}

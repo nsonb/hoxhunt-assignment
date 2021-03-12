@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { skill } from '../../type'
 
 const Box = styled.div`
-    width: 6rem;
+    width: 5.4rem;
     background-color: pink;
-    height: 7rem;
+    height: 6rem;
     display: inline-block;
     margin: .5rem;
     border-radius: 8px;
@@ -41,7 +41,10 @@ const Element = styled.div`
     width: 3.2rem;
     font-weight: bold;
     font-size: .6rem;
-    display: inline-block;
+    position: absolute;
+    bottom: -.5rem;
+    left: 50%;
+    transform: translateX(-50%)
 `
 const ElementDmg = styled.div`
     position: absolute;
@@ -93,7 +96,7 @@ const SkillDsplay = (props: {skill: skill}) => {
                 <img src= {getImg(skill.element)} style={{display: 'block', width: '80%'}}/>
             </ElementDmg>
             <Name>{skill.name}</Name>
-            <Dmg>{skill.damage} dmg</Dmg>
+            <Dmg>{skill.damage}dmg</Dmg>
             <Element style={{backgroundColor: getElementColor(skill.element)}}>{skill.element}</Element>
         </Box>
     )

@@ -39,23 +39,23 @@ const HEROES_QUERY = gql`
 interface IHeroIndexProps {}
 const HeroCardContainer = styled.div`
 	display: flex;
-	padding: 3rem 3rem;
+	padding: 2rem 3rem;
 	align-self: center;
 	box-sizing: border-box;
-	background-color: #FBFBFB;
 	width: 100%;
-	@media (min-width: 1400px) {
-		margin-left: auto;
-		margin-right: auto;
-		flex-direction: row;
-		justify-content: space-between
+	margin-left: auto;
+	margin-right: auto;
+	flex-direction: row;
+	justify-content: space-between;
+
+	@media (max-width: 1172px) {
+		padding: 2rem 1rem;
+		max-width: 68rem;
 	}
 
-	@media (max-width: 800px) {
-		margin-left: auto;
-		margin-right: auto;
+	@media (max-width: 1028px) {
+		padding: 2rem .2rem;
 		flex-direction: column;
-		justify-content: space-between
 	}
 `;
 
@@ -65,6 +65,7 @@ const handleError = (message: string) => <div>Error! {message}</div>;
 
 export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 	const { data, error, loading } = useQuery(HEROES_QUERY);
+
 	const [ currentHover, setCurrentHover ] = React.useState<number | null >(null)
 	if (error) {
 		return handleError(error.message);
@@ -75,7 +76,7 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 	}
 
 	return (
-		<main>
+		<main style={{backgroundColor: '#FBFBFB', overflow: 'hidden'}}>
 			<TopBar />
 			<Hero />
 			<Section
@@ -90,19 +91,22 @@ export const HeroIndex: React.FC<IHeroIndexProps> = () => {
 			{/** Improve this section. Data provided is defined on top in GraphQL query. You can decide what you use and what you dont't.*/}
 			<HeroCardContainer>
 				{data.heroes.map((hero: IHeroCardProps, index: number) => {
-					console.log(hero)
 					return (
 						<HeroCard 
 							key={hero.name} 
 							hero = {hero} 
 							index = {index} 
 							setCurrentHover={setCurrentHover}
-							dsplay = {currentHover === null? 'equal' : (index === currentHover? 'main' : 'sub')}
+							dsplay = {
+								window.screen.width > 1028 ?
+									(currentHover === null? 'equal' : 
+										(index === currentHover? 'main' : 'sub')) :
+									'full'
+							}
 						/>
 					)
 				})}
 			</HeroCardContainer>
-			
 			<Footer />
 		</main>
 	);
