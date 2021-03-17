@@ -63,13 +63,13 @@ const ElementDmg = styled.div`
 const getImg = (element: string) => {
     switch(element) {
         case 'Fire': 
-            return "http://localhost:8080/public/img/fire.svg"
+            return "public/img/fire.svg"
         case 'Psychic': 
-            return "http://localhost:8080/public/img/psychic.svg"
+            return "public/img/psychic.svg"
         case 'Physical':
-            return "http://localhost:8080/public/img/fist.svg"
+            return "public/img/fist.svg"
         case 'Plasma':
-            return "http://localhost:8080/public/img/plasma.svg"
+            return "public/img/plasma.svg"
     }
 }
 

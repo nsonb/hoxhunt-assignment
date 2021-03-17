@@ -59,7 +59,7 @@ const Container = styled.div`
         position: absolute;
         bottom: .9rem;
         left: 50%;
-        width: 20rem;
+        width: 30rem;
         font-size: .8rem;
         z-index: 5;
         padding: .8rem;
@@ -166,7 +166,7 @@ const Title = styled.div`
 // another card in the set is hovered
 const getWidth = (dsplay: string) => {
   switch (dsplay) {
-    case 'main': return '55%' ;    
+    case 'main': return '45%' ;    
     case 'equal': return '30%';    
     case 'sub' : return '15%'; 
     case 'full': return '80%';   
