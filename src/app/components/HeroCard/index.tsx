@@ -196,8 +196,7 @@ export const HeroCard = (props: {
   const [ flipped, setFlipped ] = React.useState(false)
   const { hero, index, dsplay, setCurrentHover } = props
   const { data, loading, error } = usePalette(hero.imgUrl)
-  console.log(window.screen.width)
-  console.log(canHover())
+  
   return (
     <Container onClick={() => {setFlipped(!flipped);setCurrentHover(null)}} style={{width: getWidth(dsplay)}}>
       {/* front face of the component */}
@@ -257,7 +256,6 @@ export const HeroCard = (props: {
               return <SkillDsplay skill = {s} key={s.name+s.element}/>
             })}
           </div>
-          
         </AttributeBox>
       </div>
       
